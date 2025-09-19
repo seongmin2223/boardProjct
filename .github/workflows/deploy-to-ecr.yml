@@ -10,7 +10,7 @@ on:
 # 환경 변수 설정
 env:
   AWS_REGION: ap-northeast-2     # 사용할 AWS 리전 (서울)
-  ECR_REPOSITORY: boardprojct    # ECR 리포지토리 이름
+  ECR_REPOSITORY: boardproject    # ECR 리포지토리 이름
 
 jobs:
   build-and-push-to-ecr:
