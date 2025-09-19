@@ -1,8 +1,8 @@
 # Dockerfile
 
 # --- 1. 빌드(Build) 단계 ---
-# AWS Corretto JDK 17을 기반으로 빌드 환경을 설정합니다.
-FROM amazon/amazon-corretto:17-alpine-jdk as builder
+# AWS Public ECR에서 Amazon Corretto JDK 17 이미지를 가져옵니다.
+FROM public.ecr.aws/amazoncorretto/amazon-corretto:17-alpine-jdk as builder
 
 WORKDIR /workspace
 
@@ -23,8 +23,8 @@ RUN ./gradlew build -x test
 
 
 # --- 2. 실행(Runtime) 단계 ---
-# 더 가벼운 JRE 이미지를 기반으로 최종 실행 환경을 설정합니다.
-FROM amazon/amazon-corretto:17-alpine-jre
+# 더 가벼운 JRE 이미지를 AWS Public ECR에서 가져옵니다.
+FROM public.ecr.aws/amazoncorretto/amazon-corretto:17-alpine-jre
 
 WORKDIR /app
 
