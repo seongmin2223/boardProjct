@@ -1,8 +1,8 @@
 # Dockerfile
 
 # --- 1. 빌드(Build) 단계 ---
-# AWS Public ECR에서 Amazon Corretto 17 JDK 이미지를 가져옵니다.
-FROM public.ecr.aws/amazoncorretto/amazon-corretto:17-jdk as builder
+# 표준 Eclipse Temurin (OpenJDK) 17 JDK 이미지를 사용합니다.
+FROM eclipse-temurin:17-jdk-alpine as builder
 
 WORKDIR /workspace
 
@@ -23,8 +23,8 @@ RUN ./gradlew build -x test
 
 
 # --- 2. 실행(Runtime) 단계 ---
-# 더 가벼운 JRE 이미지를 AWS Public ECR에서 가져옵니다.
-FROM public.ecr.aws/amazoncorretto/amazon-corretto:17-jre
+# 더 가벼운 JRE 이미지를 사용합니다.
+FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app
 
