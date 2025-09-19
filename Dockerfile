@@ -1,8 +1,8 @@
 # Dockerfile
 
 # --- 1. 빌드(Build) 단계 ---
-# AWS Public ECR에서 Amazon Corretto JDK 17 이미지를 가져옵니다.
-FROM public.ecr.aws/amazoncorretto/amazon-corretto:17-alpine-jdk as builder
+# AWS Public ECR에서 Amazon Corretto 17 (Amazon Linux 2 기반) 이미지를 가져옵니다.
+FROM public.ecr.aws/amazoncorretto/amazon-corretto:17-al2-jdk as builder
 
 WORKDIR /workspace
 
@@ -24,7 +24,7 @@ RUN ./gradlew build -x test
 
 # --- 2. 실행(Runtime) 단계 ---
 # 더 가벼운 JRE 이미지를 AWS Public ECR에서 가져옵니다.
-FROM public.ecr.aws/amazoncorretto/amazon-corretto:17-alpine-jre
+FROM public.ecr.aws/amazoncorretto/amazon-corretto:17-al2-jre
 
 WORKDIR /app
 
